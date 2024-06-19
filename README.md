@@ -103,3 +103,76 @@ Hub are simply multi-port repeater mean they send the recieving packet to all th
 - **Routing table** - all networks a router knows about
 - When a device is unable to find the dst in its network it sends it to the default gateway
 - ![router](https://i.ibb.co/JcDppmw/Screenshot-from-2024-06-19-11-25-47.png)
+
+## OSI Model
+
+**Its just a way of communication**
+**Purpose of Networking**
+- Allow two hosts to share data with one another
+
+**OSI model divides rules of networking into 7 layers**
+- Each layer servers a specific function. 
+- ![osi_model](https://www.practicalnetworking.net/wp-content/uploads/2016/01/packtrav-osi-layers.png)
+
+
+### Layer 1 Physical - Transporting Bits
+- Computer data exists in the form of bits(1's and 0's).
+- Something has to transport those bits between hosts.
+- L1 Technologies : Cables,wifi,repeaters.
+- Simply the devices which carry the data.
+
+### Layer 2 Data link - Hop to Hop
+- Interacts  with the wire.
+    - Nic-Network interface cards/ wifi access cards
+- Addressing Scheme - MAC addresses
+    - 48 bits,represented as 12 hex digits
+    - Every NIC has a unique MAC address
+- Switchs are a example of layer 2 Technologies
+as they help to transfer data from one NIC to another between two devices by knowing there mac addresses
+- Often communication between hosts require multiple hops
+- ![hop-hop](https://i.ibb.co/n0Z2PXX/Screenshot-from-2024-06-19-12-26-06.png)
+**In these to transfer data from a1a1 mac to e8e8 first the data moves from a1a1 hop to b2b2 hope and for these L-2 is responsible**
+
+
+### Layer 3 Network - End to End
+- If layer 2 is responsible for hop to hop then what is responsible for end to end transmissoin of data .yes it's layer 3
+- Address Scheme - IP address
+- Anthing having a IP address is considered to be layer 3
+
+**Layer 3 - IP address          - End to end delivery**
+
+**Layer 2 - MAC address         - Hop to Hop delivery**
+
+why do we need both of them ? 
+lets see.
+
+- ![](https://i.ibb.co/qpwhBDH/Screenshot-from-2024-06-19-13-16-09.png)
+
+Over  data a layer 3 is added as we know the destination IP address and then the layer 2 is added to it which tell what is the next hop  then after reaching the hop the layer 2 changes and sets to b3b3 --> c4c4 then c5c5 --> d6d6 then d7d7 --> e8e8 then as the layer 3 IP matches to the computer then both layer are removed and the computer recieved the data
+
+
+### Layer 4 Transport - Service to Service
+
+**Lets assume a scenario . we are using a computer having a mac,ip address to serve browser and plaing game and attending a meeting at the same time, Each of these server send and recieve packets of data  and all the data will be recieved by the layer 3 header so how will it distinguish the packets between the different services , that where layer 4 comes into play.It makes sure that the right program recieve the right data**
+
+- Address Scheme - Ports
+    - 0-65535 - TCP -favour reliablity
+    - 0-65535 -UDP - favour efficiency
+
+- Servers listen for requests to pre-defined  Ports
+- Clients select random port for each connection
+    - ![ports](https://i.ibb.co/vPMvZXf/Screenshot-from-2024-06-19-14-39-21.png)
+    - ![ports_2](https://i.ibb.co/yh3x43X/Screenshot-from-2024-06-19-14-44-07.png)
+
+- what if we are using the same service on the same device on different windows ,why don't they merge?
+    - because we use different ports for all different windows 
+    - eg ![ports_3](https://i.ibb.co/qWbnkgG/Screenshot-from-2024-06-19-14-44-27.png)
+
+
+### Layer 5,6,7 Session,Presentation,Application
+
+**Distinctino between these layers is somewhat not clear or definite**
+
+- other Networking models combine these into one layer
+- Basically these layers are the part of program or software
+- ![tcp_ip](https://i.ibb.co/7b82FfX/Screenshot-from-2024-06-19-14-53-27.png)
