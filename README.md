@@ -96,3 +96,10 @@ Hub are simply multi-port repeater mean they send the recieving packet to all th
     - Host on a network share the same IP address space
     - ![switch_2](https://i.ibb.co/tpshZL6/Screenshot-from-2024-06-18-22-00-47.png)
     
+### Router
+*facilitate communication between networks*
+- Routers learn which networks they are attached to (mean they have a ip address in that network)
+    - Known as Routes - Stored in a Routing table
+- **Routing table** - all networks a router knows about
+- When a device is unable to find the dst in its network it sends it to the default gateway
+- ![router](https://i.ibb.co/JcDppmw/Screenshot-from-2024-06-19-11-25-47.png)
