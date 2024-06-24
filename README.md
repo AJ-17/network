@@ -28,13 +28,15 @@ In these document we would know how do data flow through different devices & int
     - [Layer 2 Data link - Hop to Hop](Layer-2-Data-link---Hop-to-Hop)
     - [Layer 3 Network - End to End](Layer-3-Network---End-to-End)
     - [Layer 4 Transport - Service to Service](Layer-4-Transport---Service-to-Service)
-    - [Layer 5,6,7 Session,Presentation,Application](Layer-5,6,7-Session,Presentation,Application)
+    - [Layer 5 Session](Layer-5-Session)
+    - [Layer 6 Presentation](Layer-6-Presentation)
+    - [Layer 7 Application](Layer-7-Application)
 - [Everthing Hosts do to speak on the Internet](#Everthing-Hosts-do-to-speak-on-the-Internet)
     - [Hosts connected directly to each other](Hosts-connected-directly-to-each-other)
     - [Hosts connected through a Router](Hosts-connected-through-a-Router)
 - [Everything switches do to facilitate communication](Everything-switches-do-to-facilitate-communication)
 - [Everthing Routers do](Everthing-Routers-do)
-
+- [Protocols](Protocols)
 
 ## Network Devices
 
@@ -183,15 +185,22 @@ Over  data a layer 3 is added as we know the destination IP address and then the
     - eg ![ports_3](https://i.ibb.co/qWbnkgG/Screenshot-from-2024-06-19-14-44-27.png)
 
 
-### Layer 5,6,7 Session,Presentation,Application
+### Layer 5 Session
 
-**Distinctino between these layers is somewhat not clear or definite**
+**While surfing a website suppose we change our wifi network then how will the site know that its still us as the layer 3 is changed to solve these problem and  again & again login/logout problem cookies are used which are users local storage info which help site to DISTINGUISH between user independent of later 1,2,3,4**
 
-- other Networking models combine these into one layer
-- Basically these layers are the part of program or software
-- ![tcp_ip](https://i.ibb.co/7b82FfX/Screenshot-from-2024-06-19-14-53-27.png)
+- HTTP cookies are a type of layer 5 they are arbitary text strings that store user-specific information
 
 
+### Layer 6 Presentation
+
+**HTTP uses ASCII ecoding so each 8 bit binary  are converted into a ASCII character in these layer **
+- Basically layer 6 tells how to interpredict 1's and 0's data 
+
+### Layer 7 Application
+**The real execution of request/response or data happens here**
+
+- eg using a GET /simple.html HTTP/1.1  Host :site.com
 ### lets see the complete process at once 
 ![](https://i.ibb.co/Tcntcsr/Screenshot-from-2024-06-19-19-37-03.png)
 
@@ -317,4 +326,81 @@ whereas a router will help the packet reach its destination
 
 - Routing table can be populated via three methods:
     - Direct Connected - Routes for the networks which are attached 
+    ![](https://i.ibb.co/5YD9432/Screenshot-from-2024-06-23-16-00-07.png)
     
+    but what if a device in 10.0.66.x/24 want to talks with a device in 10.0.44.x/24
+    there is no direct  route so we will see the second type
+
+    - Static Routes - Routes manually provided by a Adminstrator
+
+    it tells if it want to talk to a specific IP range then it can send the packet to a following router IP
+    ![](https://i.ibb.co/99S0s43/Screenshot-from-2024-06-23-16-35-23.png)
+
+    - Dyanmic Routes - Routes automatically learned form other routers. 
+    although they are same as static but the only difference is they are added automatically
+
+    ![](https://i.ibb.co/1XWK44f/Screenshot-from-2024-06-23-16-49-02.png)
+
+- Routers also have ARP tables
+    - Everything with a IP have a ARP table
+![](https://i.ibb.co/1TTh25q/Screenshot-from-2024-06-23-16-54-54.png)
+
+
+***Lets see how does thes arp table starts from empty***
+
+*Supporse 10.0.44.9 wants to send a message to 10.0.66.7*
+
+-   As the IP is not in its own network so it will send the data to the default gateway
+-   But to sednd the data L2 header is not know mean the MAC of Default gateway
+-   SO a ARP request will be broadcasted 
+-   And router will add the IP and MAC of A in iys ARP table
+-   now a arp request will be sent to know the address of router 2 by router 1 then for c and the packet will reach c 
+- Now for sending a message from C to A no arp will be required as all required mac are in the respective arp table
+
+## Protocals
+**Set of rules and messages that form an Internet Standard**
+
+- ARP - Address Resolution Protocal - RFC 826
+    - Resolves IP to MAC mapping
+    - ARP request/ARP responses
+
+![RFC_826](https://i.ibb.co/yYGS1cw/Screenshot-from-2024-06-24-13-30-50.png)
+
+- FTP - File Transfer Protocol
+    - ![](https://i.ibb.co/QMZBVXW/Screenshot-from-2024-06-24-13-46-16.png)
+
+- SMTP - Simple Mail Transfer Protocol
+    - ![](https://i.ibb.co/fGV0hGT/Screenshot-from-2024-06-24-13-52-35.png)
+
+- HTTP - Hyper Text Transfer Protocol
+    - ![](https://i.ibb.co/B6pX1ZM/Screenshot-from-2024-06-24-13-56-12.png)
+
+- SSL - Secure Sockets Layer
+
+- TLS - Transport Layer Security
+
+- HTTS - HTTP secured with SSL/TLS is know as HTTPS
+
+![](https://i.ibb.co/Nsn7xrd/Screenshot-from-2024-06-24-13-56-28.png)
+
+
+- DNS - Domain Name System
+    - Converts Domain Names into IP addresses
+    -  eg Site.com --> 35.176.92.19
+    
+
+Every  host needs four items for Internet connectivity
+- IP Address  - Host's Identity on the internet
+- Subnet Mask - Size of Host's Network
+- Default Gateway - Router's IP address
+- DNS Server IP(s) - Translate domain names to IPs
+
+
+But everytime we connect to a new wifi we don't configure them so what controls it?
+
+- DHCP - Dynamic Host Configuration Protocol
+    - DHCP server provides IP/SM/DG/DNS for clients
+
+
+
+------------------End------------------------------------------
